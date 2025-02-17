@@ -1,5 +1,13 @@
 import requests
 from datetime import datetime, timedelta
+from abc import ABC, abstractmethod
+
+
+# Абстрактный класс для форматирования валюты
+class AbstractCurrencyFormatter(ABC):
+    @abstractmethod
+    def format(self, amount, currency):
+        pass
 
 
 # Класс для работы с API валют
@@ -15,7 +23,7 @@ class CurrencyAPI:
         """
         Получает курс валюты из API.
         :from_currency: Исходная валюта (например, "USD").
-        :o_currency: Целевая валюта (например, "EUR").
+        :to_currency: Целевая валюта (например, "EUR").
         :return: Курс валюты (float).
         """
         response = requests.get(f"{self.api_url}?base={from_currency}&symbols={to_currency}")
@@ -143,34 +151,33 @@ class CurrencyValidator:
 
 
 # Класс для форматирования вывода
-class CurrencyFormatter:
+class CurrencyFormatter(AbstractCurrencyFormatter):
     def format(self, amount, currency):
-        """
-        Форматирует результат конвертации.
-        :amount: Сумма.
-        :currency: Код валюты.
-        :return: Отформатированная строка.
-        """
+
         return f"Результат конвертации: {amount:.2f} {currency}"
+
+
+# Класс для "красивого" форматирования вывода
+class FancyCurrencyFormatter(AbstractCurrencyFormatter):
+    def format(self, amount, currency):
+
+
+        return f"✨ {amount:.2f} {currency} ✨"
 
 
 # Главный класс, который управляет всей программой
 class Main:
     def __init__(self):
-        """
-        Инициализация главного класса.
-        """
+
         self.api_url = "https://api.exchangerate-api.com/v4/latest/USD"  # Пример API
         self.api = CurrencyAPI(self.api_url)  # Создаем объект CurrencyAPI
         self.cache = CurrencyCache()
-        self.formatter = CurrencyFormatter()
+        self.formatter = FancyCurrencyFormatter()  # Используем FancyCurrencyFormatter
         self.converter = CurrencyConverter(self.cache, self.formatter, self.api)  # Передаем api
         self.validator = CurrencyValidator(valid_currencies=["USD", "EUR", "GBP", "JPY", "RUB"])
 
     def run(self):
-        """
-        Основной метод, который запускает программу.
-        """
+
         # Ввод данных
         print("= Конвертер валют =")
         from_currency = self.validator.input_currency("Введите исходную валюту (например, USD): ")

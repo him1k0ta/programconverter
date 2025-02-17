@@ -10,8 +10,8 @@ class CurrencyValidator:
     def input_currency(self, prompt):
         """
         Ввод и валидация кода валюты.
-        :prompt: Подсказка для ввода (например, "Введите исходную валюту: ").
-        :return: Корректный код валюты.
+        :prompt: Подсказка для ввода например, "Введите исходную валюту:.
+        :return: корректный код валюты.
         """
         while True:
             currency = input(prompt).upper()

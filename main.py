@@ -1,8 +1,9 @@
 from CurrencyAPI import CurrencyAPI
 from CurrencyCache import CurrencyCache
-from CurrencyFormatter import CurrencyFormatter
+from CurrencyFormatter import FancyCurrencyFormatter
 from CurrencyConverter import CurrencyConverter
 from CurrencyValidator import CurrencyValidator
+
 class Main:
     def __init__(self):
         """
@@ -11,9 +12,9 @@ class Main:
         self.api_url = "https://api.exchangerate-api.com/v4/latest/USD"  # Пример API
         self.api = CurrencyAPI(self.api_url)  # Создаем объект CurrencyAPI
         self.cache = CurrencyCache()
-        self.formatter = CurrencyFormatter()
+        self.formatter = FancyCurrencyFormatter()  # Используем FancyCurrencyFormatter
         self.converter = CurrencyConverter(self.cache, self.formatter, self.api)  # Передаем api
-        self.validator = CurrencyValidator(valid_currencies=["USD", "EUR", "RUB"])
+        self.validator = CurrencyValidator(valid_currencies={"USD": "доллар","EUR": "евро","GBP": "фунт стерлингов","JPY": "иена","RUB": "рубль"})
 
     def run(self):
         """

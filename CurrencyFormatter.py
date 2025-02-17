@@ -1,10 +1,15 @@
-# Класс для форматирования вывода
-class CurrencyFormatter:
-    def format(self, amount, currency):
+from AbstractFormatter import AbstractCurrencyFormatter
+
+class CurrencyFormatter(AbstractCurrencyFormatter):
+    @staticmethod
+    def format(amount, currency):
         """
-        Форматирует результат конвертации.
-        :amount: Сумма.
-        :currency: Код валюты.
-        :return: Отформатированная строка.
+        форматирует результат конвертации.
         """
         return f"Результат конвертации: {amount:.2f} {currency}"
+
+
+class FancyCurrencyFormatter(AbstractCurrencyFormatter):
+    @staticmethod
+    def format(amount, currency):
+        return f"✨ {amount:.2f} {currency} ✨"
