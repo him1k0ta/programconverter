@@ -9,10 +9,10 @@ class Main:
         """
         Инициализация главного класса.
         """
-        self.api_url = "https://api.exchangerate-api.com/v4/latest/USD"  # Пример API
+        self.api_url = "https://api.exchangerate-api.com/v4/latest/USD"
         self.api = CurrencyAPI(self.api_url)  # Создаем объект CurrencyAPI
         self.cache = CurrencyCache()
-        self.formatter = FancyCurrencyFormatter()  # Используем FancyCurrencyFormatter
+        self.formatter = FancyCurrencyFormatter()
         self.converter = CurrencyConverter(self.cache, self.formatter, self.api)  # Передаем api
         self.validator = CurrencyValidator(valid_currencies={"USD": "доллар","EUR": "евро","GBP": "фунт стерлингов","JPY": "иена","RUB": "рубль"})
 

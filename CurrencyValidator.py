@@ -27,11 +27,15 @@ class CurrencyValidator:
         while True:
             try:
                 amount = float(input("Введите сумму: "))
-                if self.validate_amount(amount):
+                if self.validate_amount(amount) and amount > 0:
                     return amount
-                print("Ошибка: сумма должна быть положительным числом.")
-            except ValueError:
-                print("Ошибка: введите числовое значение.")
+                elif amount < 0:
+                    raise ValueError("Ошибка: сумма должна быть положительным числом")
+
+            except ValueError as e:
+                print(e)
+            finally:
+                print("============")
 
     def validate_currency(self, currency):
         """
@@ -47,5 +51,7 @@ class CurrencyValidator:
         :amount: Сумма.
         :return: True, если сумма корректна, иначе False.
         """
-        return isinstance(amount, (int, float)) and amount > 0
-
+        try:
+            return isinstance(amount, (int, float))
+        except ValueError:
+            print("Ошибка: ваша жизнь")
