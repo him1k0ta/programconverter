@@ -22,7 +22,6 @@ class CurrencyCache:
             if datetime.now() - timestamp < self.cache_duration:
                 return rate
 
-        # Если кэш устарел или отсутствует, запрашиваем у API
         rate = api.get_exchange_rate(from_currency, to_currency)
         self.update_cache(from_currency, to_currency, rate)
         return rate
