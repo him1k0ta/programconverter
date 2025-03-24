@@ -17,7 +17,7 @@ class CurrencyValidator:
             currency = input(prompt).upper()
             if self.validate_currency(currency):
                 return currency
-            print(f"Ошибка: валюта '{currency}' не поддерживается.")
+            return (f"Ошибка: валюта '{currency}' не поддерживается.")
 
     def input_amount(self):
         """
@@ -33,9 +33,9 @@ class CurrencyValidator:
                     raise ValueError("Ошибка: сумма должна быть положительным числом")
 
             except ValueError as e:
-                print(e)
+                return(e)
             finally:
-                print("============")
+                return("============")
 
     def validate_currency(self, currency):
         """
@@ -54,4 +54,4 @@ class CurrencyValidator:
         try:
             return isinstance(amount, (int, float))
         except ValueError:
-            print("Ошибка: ваша жизнь")
+            return("Ошибка: ваша жизнь")
