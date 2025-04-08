@@ -5,7 +5,6 @@ from PyQt6.QtWidgets import (
     QMenuBar, QMenu)
 from PyQt6.QtCore import Qt, QTranslator, QLocale
 from PyQt6.QtGui import QFont, QIcon, QAction
-
 from CurrencyAPI import CurrencyAPI
 from CurrencyCache import CurrencyCache
 from CurrencyConverter import CurrencyConverter
